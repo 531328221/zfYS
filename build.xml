@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="modules.zendframework.com" default="main">
+
+    <property file="build.properties" />
+
+    <target hidden="true" name="main">
+        <echo message="Choose your task, please - use 'vendor/bin/phing -l' to see a list of available tasks" />
+    </target>
+
+    <target hidden="true" name="git-reset">
+        <echo message="Clean up" />
+        <exec logoutput="true" checkreturn="true" command="ssh ${ssh.user}@${ssh.host} -p ${ssh.port} 'cd ${project.root}; git reset --hard HEAD'" />
+    </target>
+
+    <target hidden="true" name="git-pull">
+        <echo message="Pull changes from origin" />
+        <exec logoutput="true" checkreturn="true" command="ssh ${ssh.user}@${ssh.host} -p ${ssh.port} 'cd ${project.root}; git pull origin master ${tag}'" />
+    </target>
+
+    <target hidden="true" name="composer-install">
+        <echo message="Install dependencies with Composer" />
+        <exec logoutput="true" checkreturn="true" command="ssh ${ssh.user}@${ssh.host} -p ${ssh.port} 'cd ${project.root}; composer install --no-dev'" />
+    </target>
+
+    <target hidden="true" name="doctrine-migration">
+        <echo message="Runs Doctrine migrations" />
+        <exec logoutput="true" checkreturn="true" command="ssh ${ssh.user}@${ssh.host} -p ${ssh.port} 'cd ${project.root}; php public/index.php migrations:migrate --no-interaction --verbose'" />
+    </target>
+
+    <target name="deploy" description="Deploys application to production" depends="git-reset, git-pull, composer-install, doctrine-migration">
+        <echo message="Successfully deployed to production" />
+    </target>
+</project>

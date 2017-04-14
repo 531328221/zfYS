@@ -1,0 +1,11 @@
+<?php echo $this->partial('common/menu'); ?>
+<h1>雇员表</h1>
+<table>
+	<?php foreach ($this->posts as $post):?>
+	<tr>
+		<td><?= $post->getId() ?></td>
+		<td><?= $post->getName() ?></td>
+		<td><?= $post->getRoleType() ?></td>
+	</tr>
+	<?php endforeach ?>
+</table>
