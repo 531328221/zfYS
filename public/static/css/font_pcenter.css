@@ -52,7 +52,7 @@ article, aside, details, figcaption, figure, footer, header, main, menu, nav, se
 }
 .menu-wrapper{
     display: inline-block;
-    position: relative;
+    position: fixed;
     width: 14rem;
     z-index: 700;
 }

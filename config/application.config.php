@@ -2,8 +2,8 @@
 
 return [
     'modules' => [
-        'YSfront',
-		'User'
+        'Frontend',
+		'Customer'
     ],
     'module_listener_options' => [
         'config_glob_paths'    => [
